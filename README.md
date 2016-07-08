@@ -20,9 +20,9 @@ func main() {
 		nilFoo *Foo
 	)
 
-	var parmInt int = Optional(nilInt).(int)
-	var parmStr string = Optional(nilStr).(string)
-	var parmFoo Foo = Optional(nilFoo).(Foo)
+	var parmInt int = optional.Optional(nilInt).(int)
+	var parmStr string = optional.Optional(nilStr).(string)
+	var parmFoo Foo = optional.Optional(nilFoo).(Foo)
 
 	fmt.Printf("parmInt: %d, parmStr: %s, parmFoo: %+v\n", parmInt, parmStr, parmFoo)
 }
