@@ -16,3 +16,9 @@ func Optional(i interface{}) interface{} {
 	t := inspect(i)
 	return reflect.Zero(t).Interface()
 }
+
+func IsZero(i interface{}) bool {
+	v := reflect.ValueOf(i)
+	t := reflect.TypeOf(i)
+	return v.Interface() == reflect.Zero(t).Interface()
+}

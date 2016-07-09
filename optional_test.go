@@ -22,6 +22,13 @@ type Foo struct {
 // 	fmt.Printf("parmInt: %d, parmStr: %s, parmFoo: %+v\n", parmInt, parmStr, parmFoo)
 // }
 
+func TestZero(t *testing.T) {
+	// var foo *Foo = new(Foo)
+	var a *string
+	t.Logf("Is zero: %v\n", IsZero(a))
+
+}
+
 func BenchmarkGetIntNil(b *testing.B) {
 	var nilInt *int
 
