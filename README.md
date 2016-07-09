@@ -39,12 +39,17 @@ You can run the benchmark on your computer by excute:
  the result on my computer is as follow:
 
 ```shell
-BenchmarkGetInt-4   	20000000	        74.4 ns/op
-BenchmarkGetIntRaw-4	2000000000	         0.51 ns/op
-BenchmarkGetStr-4   	20000000	        94.7 ns/op
-BenchmarkGetStrRaw-4	2000000000	         0.50 ns/op
-BenchmarkGetFooNil-4	20000000	        95.5 ns/op
-BenchmarkGetFoo-4   	20000000	        93.7 ns/op
-BenchmarkGetStrFoo-4	2000000000	         1.03 ns/o
+BenchmarkGetIntNil-4      	20000000	        75.2 ns/op
+BenchmarkGetInt-4         	20000000	        74.3 ns/op
+BenchmarkGetIntNativeNil-4	2000000000	         0.50 ns/op
+BenchmarkGetIntNative-4   	2000000000	         1.02 ns/op
+BenchmarkGetStrNil-4      	20000000	        95.1 ns/op
+BenchmarkGetStr-4         	20000000	        95.7 ns/op
+BenchmarkGetStrNativeNil-4	2000000000	         0.50 ns/op
+BenchmarkGetStrNative-4   	2000000000	         1.04 ns/op
+BenchmarkGetFooNil-4      	20000000	        97.0 ns/op
+BenchmarkGetFoo-4         	20000000	        96.4 ns/op
+BenchmarkGetStrFooNil-4   	2000000000	         0.50 ns/op
+BenchmarkGetStrFoo-4      	2000000000	         1.03 ns/op
 ```
 
