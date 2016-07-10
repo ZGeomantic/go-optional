@@ -1,6 +1,39 @@
 # go-optional
 
 ##Quick Start
+
+if you want to dereference a pointer, usually you neet to do this:
+
+```go
+	var a *int
+	var b int
+	if a != nil {
+		b = *a
+	} else {
+		b = 0
+	}
+
+	var c *Foo
+	var d Foo
+	if c != nil {
+		d = *c
+	} else {
+		d = Foo{}
+	}
+```
+now you can do like this:
+
+```go
+	var a *int
+	var b int
+	b = optional.Deref(a).(int)
+	b = optional.DerefMust(a,100).(int)
+
+	var c *Foo
+	var d Foo
+	d = optional.Deref(c).(Foo)
+```
+
 ######Download and install
 
     go get github.com/ZGeomantic/go-optional
@@ -20,9 +53,9 @@ func main() {
 		nilFoo *Foo
 	)
 
-	var parmInt int = optional.Optional(nilInt).(int)
-	var parmStr string = optional.Optional(nilStr).(string)
-	var parmFoo Foo = optional.Optional(nilFoo).(Foo)
+	var parmInt int = optional.Deref(nilInt).(int)
+	var parmStr string = optional.Deref(nilStr).(string)
+	var parmFoo Foo = optional.Deref(nilFoo).(Foo)
 
 	fmt.Printf("parmInt: %d, parmStr: %s, parmFoo: %+v\n", parmInt, parmStr, parmFoo)
 }
@@ -39,17 +72,17 @@ You can run the benchmark on your computer by excute:
  the result on my computer is as follow:
 
 ```shell
-BenchmarkGetIntNil-4      	20000000	        75.2 ns/op
-BenchmarkGetInt-4         	20000000	        74.3 ns/op
+BenchmarkGetIntNil-4      	20000000	       104 ns/op
+BenchmarkGetInt-4         	10000000	       119 ns/op
 BenchmarkGetIntNativeNil-4	2000000000	         0.50 ns/op
-BenchmarkGetIntNative-4   	2000000000	         1.02 ns/op
-BenchmarkGetStrNil-4      	20000000	        95.1 ns/op
-BenchmarkGetStr-4         	20000000	        95.7 ns/op
+BenchmarkGetIntNative-4   	2000000000	         1.01 ns/op
+BenchmarkGetStrNil-4      	10000000	       123 ns/op
+BenchmarkGetStr-4         	10000000	       137 ns/op
 BenchmarkGetStrNativeNil-4	2000000000	         0.50 ns/op
-BenchmarkGetStrNative-4   	2000000000	         1.04 ns/op
-BenchmarkGetFooNil-4      	20000000	        97.0 ns/op
-BenchmarkGetFoo-4         	20000000	        96.4 ns/op
-BenchmarkGetStrFooNil-4   	2000000000	         0.50 ns/op
-BenchmarkGetStrFoo-4      	2000000000	         1.03 ns/op
+BenchmarkGetStrNative-4   	2000000000	         1.05 ns/op
+BenchmarkGetFooNil-4      	10000000	       123 ns/op
+BenchmarkGetFoo-4         	10000000	       137 ns/op
+BenchmarkGetStrFooNil-4   	2000000000	         0.51 ns/op
+BenchmarkGetStrFoo-4      	2000000000	         1.02 ns/op
 ```
 
