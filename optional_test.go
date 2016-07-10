@@ -8,19 +8,35 @@ type Foo struct {
 	A string
 }
 
-// func TestDemo(t *testing.T) {
-// 	var (
-// 		nilInt *int
-// 		nilStr *string
-// 		nilFoo *Foo
-// 	)
+func TestDemo(t *testing.T) {
+	var (
+		nilInt *int
 
-// 	var parmInt int = Optional(nilInt).(int)
-// 	var parmStr string = Optional(nilStr).(string)
-// 	var parmFoo Foo = Optional(nilFoo).(Foo)
+		nonnilInt *int
+		expectInt int = 100
 
-// 	fmt.Printf("parmInt: %d, parmStr: %s, parmFoo: %+v\n", parmInt, parmStr, parmFoo)
-// }
+		defaultInt int = 1234
+	)
+
+	nonnilInt = &expectInt
+
+	if Deref(nilInt) != 0 {
+		t.Fatalf("nilInt expect 0\n")
+	}
+
+	if Deref(nonnilInt) != expectInt {
+		t.Fatalf("nonnilInt expect %d, actucal: %d\n", expectInt, *nonnilInt)
+	}
+
+	if DerefMust(nilInt, defaultInt) != defaultInt {
+		t.Fatalf("nonnilInt expect %d, actucal: %d\n", defaultInt, *nilInt)
+	}
+
+	if DerefMust(nonnilInt, defaultInt) != expectInt {
+		t.Fatalf("nonnilInt expect %d, actucal: %d\n", expectInt, *nonnilInt)
+	}
+
+}
 
 func TestZero(t *testing.T) {
 	// var foo *Foo = new(Foo)
@@ -33,14 +49,14 @@ func BenchmarkGetIntNil(b *testing.B) {
 	var nilInt *int
 
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilInt).(int)
+		_ = Deref(nilInt).(int)
 	}
 }
 func BenchmarkGetInt(b *testing.B) {
 	var nilInt *int = new(int)
 
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilInt).(int)
+		_ = Deref(nilInt).(int)
 	}
 }
 
@@ -72,14 +88,14 @@ func BenchmarkGetStrNil(b *testing.B) {
 	var nilStr *string
 
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilStr).(string)
+		_ = Deref(nilStr).(string)
 	}
 }
 func BenchmarkGetStr(b *testing.B) {
 	var nilStr *string = new(string)
 
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilStr).(string)
+		_ = Deref(nilStr).(string)
 	}
 }
 
@@ -110,7 +126,7 @@ func BenchmarkGetStrNative(b *testing.B) {
 func BenchmarkGetFooNil(b *testing.B) {
 	var nilFoo *Foo
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilFoo).(Foo)
+		_ = Deref(nilFoo).(Foo)
 	}
 }
 
@@ -118,7 +134,7 @@ func BenchmarkGetFoo(b *testing.B) {
 	var nilFoo *Foo = new(Foo)
 
 	for i := 0; i < b.N; i++ {
-		_ = Optional(nilFoo).(Foo)
+		_ = Deref(nilFoo).(Foo)
 	}
 }
 
